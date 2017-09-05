@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Расписание</string>
+
+    <string name="ponedelnik">Понедельник</string>
+    <string name="vtornik">Вторник</string>
+    <string name="sreda">Среда</string>
+    <string name="chetverg">Четверг</string>
+    <string name="pyatnica">Пятница</string>
+    <string name="subbota">Суббота</string>
+    <string name="voskresene">Воскресенье</string>
+    <string name="first_period_time">8:00 - 9:35</string>
+    <string name="second_period_time">9:45 - 11:20</string>
+    <string name="third_period_time">11:30 - 13:05</string>
+    <string name="fourth_period_time">13:30 - 15:05</string>
+    <string name="fifth_period_time">15:15 - 16:50</string>
+    <string name="sixth_period_time">17:00 - 18:35</string>
+</resources>
