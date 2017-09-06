@@ -3,6 +3,7 @@ package ru.furman.shedulenew;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import android.support.v4.app.Fragment;
@@ -17,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
 
     ViewPager pager;
     PagerAdapter pagerAdapter;
+
+    public final static Calendar dateOfStudyingBeggining = new GregorianCalendar(2017,9,1);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +40,10 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            //currentday - день в расписании
-            int currentday = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+            int currentday = Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
+            currentday-=dateOfStudyingBeggining.get(Calendar.DAY_OF_YEAR)+1;
+            currentday = Math.abs(currentday);
+            currentday%=14;
             currentday+=position;
             return PageFragment.getInstance(currentday);
         }

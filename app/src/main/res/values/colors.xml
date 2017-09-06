@@ -3,4 +3,8 @@
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#757575</color>
     <color name="colorAccent">#666464</color>
+
+    <color name="lab_color">#b2ebf2</color>
+    <color name="lecture_color">#81c784</color>
+    <color name="practice_color">#ef5350</color>
 </resources>
