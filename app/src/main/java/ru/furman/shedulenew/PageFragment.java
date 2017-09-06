@@ -117,9 +117,9 @@ public class PageFragment extends Fragment {
                     addPeriod(3,"Компьютерная алгебра","517-14","Веричев А. В.",LECTURE_TYPE);
                     break;
                 case 12:
+                    addPeriod(2,"Основы управленческой деятельности","209-14","доц. Голубева Т.В.",LECTURE_TYPE);
                     addPeriod(3,"Теория цифровой обработки сигналов и изображений","201-н.к.",null,PRACTICE_TYPE);
                     addPeriod(4,"Философия","419-14",null,PRACTICE_TYPE);
-                    addPeriod(5,"Основы управленческой деятельности","502-14","доц. Голубева Т.В.",LECTURE_TYPE);
                     break;
                 case 13:
                     addPeriod(3,"Безопасность сетей ЭВМ","102, 102а - 3",null,LAB_TYPE);

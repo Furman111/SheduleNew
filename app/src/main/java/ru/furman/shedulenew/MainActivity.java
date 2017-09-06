@@ -1,10 +1,7 @@
 package ru.furman.shedulenew;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
