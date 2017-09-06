@@ -4,17 +4,23 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 /**
  * Created by furman on 05.09.17.
  */
 
 public class PageFragment extends Fragment {
+
+    public static final String LOG_TAG = "fragment";
 
     public static final String ARGUMENT_DAY_IN_SHEDULE = "day";
 
@@ -28,6 +34,7 @@ public class PageFragment extends Fragment {
         Bundle args = new Bundle();
         args.putInt(ARGUMENT_DAY_IN_SHEDULE,day);
         pageFragment.setArguments(args);
+        Log.d(LOG_TAG,"getInstance(day="+day+")");
         return pageFragment;
     }
 
@@ -36,6 +43,7 @@ public class PageFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         day = getArguments().getInt(ARGUMENT_DAY_IN_SHEDULE);
+        Log.d(LOG_TAG,"onCreate(day="+day+")");
     }
 
     @Nullable
@@ -44,12 +52,16 @@ public class PageFragment extends Fragment {
         layoutInflater = inflater;
         View resView = layoutInflater.inflate(R.layout.fragment,null);
         linearLayout = resView.findViewById(R.id.ll);
-        if(day==7 && day==14){
-            TextView dayOffTv = new TextView(getContext());
-            dayOffTv.setTextSize(20);
-            dayOffTv.setText("Выходной");
-            dayOffTv.setLayoutParams(linearLayout.getLayoutParams());
-            linearLayout.addView(dayOffTv);
+        Log.d(LOG_TAG,"onCreateView(day = "+day+")");
+        if(day==7 || day==14){
+            TextView dayOffTV = new TextView(getContext());
+            dayOffTV.setTextSize(28);
+            dayOffTV.setTextColor(ContextCompat.getColor(getContext(),android.R.color.black));
+            dayOffTV.setText("Выходной");
+            dayOffTV.setLayoutParams(new ViewGroup.LayoutParams(WRAP_CONTENT,WRAP_CONTENT));
+
+            linearLayout.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL);
+            linearLayout.addView(dayOffTV);
         }
         else
             switch (day) {
@@ -72,7 +84,8 @@ public class PageFragment extends Fragment {
                 case 4:
                     addPeriod(1,"Безопасность сетей ЭВМ","503-14","Кузнецов М. В.",LECTURE_TYPE);
                     addPeriod(2,"Безопасность сетей ЭВМ","503-14","Кузнецов М. В.",LECTURE_TYPE);
-                    addPeriod(3, "Компьютерная алгебра", "503-14", "проф. Чернов В. М.", LECTURE_TYPE);
+                    addPeriod(3, "Компьютерная алгебра", "503-14", "Веричев А. В.", LECTURE_TYPE);
+                    break;
                 case 5:
                     addPeriod(2,"Теория цифровой обработки сигналов и изображений","201-н.к.","доц. Чичева М. А.",LECTURE_TYPE);
                     addPeriod(3,"Теория цифровой обработки сигналов и изображений","201-н.к.","доц. Чичева М. А.",LECTURE_TYPE);
@@ -83,32 +96,32 @@ public class PageFragment extends Fragment {
                     addPeriod(2,"Философия","429-14","доц. Огнев А. Н.",LECTURE_TYPE);
                     addPeriod(3,"Базы данных","517-14","доц. Додонов М. В.",LECTURE_TYPE);
                     break;
-                case 1+7:
+                case 8:
                     addPeriod(1, "Военная подготовка", null, null, PRACTICE_TYPE);
                     addPeriod(2, "Военная подготовка", null, null, PRACTICE_TYPE);
                     addPeriod(3, "Военная подготовка", null, null, PRACTICE_TYPE);
                     break;
-                case 2+7:
+                case 9:
                     addPeriod(1,"Надёжность и качество программного обеспечения ▌ Базы данных","102-3; 519-14","1) 2,6,10,14 ▌ 4,8,12,16\n2) 4,8,12,16 ▌ 2,6,10,14",LAB_TYPE);
                     addPeriod(2,"Надёжность и качество программного обеспечения ▌ Базы данных","102-3; 519-14","1) 2,6,10,14 ▌ 4,8,12,16\n2) 4,8,12,16 ▌ 2,6,10,14",LAB_TYPE);
                     addPeriod(3,"Надёжность и качество программного обеспечения","513-3а","проф. Мостовой Я. А.",LECTURE_TYPE);
                     break;
-                case 3+7:
-                    addPeriod(4,"Компьютерная алгебра","608-н.к.","проф. Чернов В. М.",LECTURE_TYPE);
+                case 10:
+                    addPeriod(4,"Компьютерная алгебра","608-н.к.","Веричев А. В.",LECTURE_TYPE);
                     addPeriod(5,"Исследование операций и теория игр","430-14","доц. Есипов Б. А.",LECTURE_TYPE);
                     addPeriod(6,"Исследование операций и теория игр","430-14","доц. Есипов Б. А.",LECTURE_TYPE);
                     break;
-                case 4+7:
+                case 11:
                     addPeriod(1,"Теория цифровой обработки сигналов и изображений","608-н.к.","доц. Чичева М. А.",LECTURE_TYPE);
                     addPeriod(2,"Базы данных","517-14","доц. Додонов М. В.",LECTURE_TYPE);
-                    addPeriod(3,"Компьютерная алгебра","517-14","проф. Чернов В. М.",LECTURE_TYPE);
+                    addPeriod(3,"Компьютерная алгебра","517-14","Веричев А. В.",LECTURE_TYPE);
                     break;
-                case 5+7:
+                case 12:
                     addPeriod(3,"Теория цифровой обработки сигналов и изображений","201-н.к.",null,PRACTICE_TYPE);
                     addPeriod(4,"Философия","419-14",null,PRACTICE_TYPE);
                     addPeriod(5,"Основы управленческой деятельности","502-14","доц. Голубева Т.В.",LECTURE_TYPE);
                     break;
-                case 6+7:
+                case 13:
                     addPeriod(3,"Безопасность сетей ЭВМ","102, 102а - 3",null,LAB_TYPE);
                     addPeriod(4,"Безопасность сетей ЭВМ","102, 102а - 3",null,LAB_TYPE);
                     break;
@@ -121,16 +134,17 @@ public class PageFragment extends Fragment {
     public static final int LAB_TYPE = 3;
 
     private void addPeriod(int numberOfPeriod, String periodName,@Nullable String audience,@Nullable String teacher,int periodType){
-        View period = layoutInflater.inflate(R.layout.lesson_item_in_list,linearLayout,true);
+        View period = layoutInflater.inflate(R.layout.lesson_item_in_list,linearLayout,false);
+        Log.d(LOG_TAG,"addPeriod");
         switch (periodType){
             case LECTURE_TYPE:
-                period.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.lecture_color));
+                    period.setBackgroundResource(R.drawable.lecture_background);
                 break;
             case PRACTICE_TYPE:
-                period.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.practice_color));
+                period.setBackgroundResource(R.drawable.practice_background);
                 break;
             case LAB_TYPE:
-                period.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.lab_color));
+                period.setBackgroundResource(R.drawable.lab_background);
                 break;
         }
         linearLayout.addView(period);

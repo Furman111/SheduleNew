@@ -5,7 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:elevation="@dimen/cardview_default_elevation"
     android:layout_marginBottom="4dp"
-    app:cardCornerRadius="@dimen/cardview_default_radius">
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    app:cardCornerRadius="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,10 +18,10 @@
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="13:30-24:00"
             android:id="@+id/time_tv"
             android:padding="4dp"
             android:textColor="@android:color/black"
+            android:textStyle="bold"
             android:layout_gravity="center"
             />
 
@@ -33,7 +35,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/lesson_name_tv"
-                android:text="ООП"
                 android:gravity="center"
                 android:padding="4dp"
                 android:textStyle="bold"
@@ -44,21 +45,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/audience_tv"
-                android:text="14к-231"
+                android:id="@+id/teacher_name_tv"
                 android:textColor="@android:color/black"
                 android:gravity="center"
+                android:textStyle="italic"
                 android:padding="4dp"
                 />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/teacher_name_tv"
+                android:id="@+id/audience_tv"
                 android:textColor="@android:color/black"
-                android:text="Кузнецов"
                 android:gravity="center"
-                android:textStyle="italic"
+                android:textStyle="bold"
                 android:padding="4dp"
                 />
 

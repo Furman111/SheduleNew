@@ -13,13 +13,14 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
     ViewPager pager;
     PagerAdapter pagerAdapter;
 
-    public final static Calendar dateOfStudyingBeggining = new GregorianCalendar(2017,9,1);
+    public final static Calendar dateOfStudyingBeggining = new GregorianCalendar(2017, 9, 1);
 
 
     @Override
@@ -32,20 +33,35 @@ public class MainActivity extends AppCompatActivity {
         pager.setAdapter(pagerAdapter);
     }
 
-    private  class MyPagerAdapter extends FragmentPagerAdapter{
+    private class MyPagerAdapter extends FragmentPagerAdapter {
 
-        public MyPagerAdapter(FragmentManager fm){
+        public MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
-            int currentday = Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
-            currentday-=dateOfStudyingBeggining.get(Calendar.DAY_OF_YEAR)+1;
-            currentday = Math.abs(currentday);
-            currentday%=14;
-            currentday+=position;
-            return PageFragment.getInstance(currentday);
+            Calendar nowDate = new GregorianCalendar();
+            nowDate.add(Calendar.DAY_OF_YEAR, position);
+            int currentWeek = nowDate.get(Calendar.WEEK_OF_YEAR);
+            currentWeek -= dateOfStudyingBeggining.get(Calendar.WEEK_OF_YEAR);
+            currentWeek = Math.abs(currentWeek);
+            currentWeek++;
+            Log.d(PageFragment.LOG_TAG,"currentWeek = "+currentWeek);
+            int currentDay = getDayOfWeek(nowDate);
+            if (currentWeek % 2 == 0) {
+                currentDay += 7;
+            }
+            return PageFragment.getInstance(currentDay);
+        }
+
+        private int getDayOfWeek(Calendar calendar){
+            int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
+            if (currentDay == 1)
+                currentDay = 7;
+            else
+                currentDay--;
+            return currentDay;
         }
 
         @Override
@@ -55,12 +71,11 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            int currentday = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-            currentday+=position;
-            if(currentday>7)
-                currentday%=7;
+            int currentday = getDayOfWeek(Calendar.getInstance());
+            currentday += position;
+            currentday %= 7;
             String dayOfWeek = null;
-            switch (currentday){
+            switch (currentday) {
                 case 1:
                     dayOfWeek = getString(R.string.ponedelnik);
                     break;
@@ -79,12 +94,13 @@ public class MainActivity extends AppCompatActivity {
                 case 6:
                     dayOfWeek = getString(R.string.subbota);
                     break;
-                case 7:
+                case 0:
                     dayOfWeek = getString(R.string.voskresene);
                     break;
             }
-            SimpleDateFormat formatter = new SimpleDateFormat("dd.MM", Locale.UK);
-            return dayOfWeek+" "+ formatter.format(new Date());
+            GregorianCalendar calendar = new GregorianCalendar();
+            calendar.add(Calendar.DAY_OF_YEAR, position);
+            return dayOfWeek + " " + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)) + "." + String.valueOf(calendar.get(Calendar.MONTH)+1);
         }
     }
 
