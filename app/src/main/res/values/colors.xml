@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0d47a1</color>
-    <color name="colorPrimaryDark">#00b8d4</color>
-    <color name="colorAccent">#00e5ff</color>
-
-    <color name="lab_color">#b2ebf2</color>
-    <color name="lecture_color">#81c784</color>
-    <color name="practice_color">#ef5350</color>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#757575</color>
 </resources>
