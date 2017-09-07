@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,16 +24,18 @@ public class PageFragment extends Fragment {
     public static final String LOG_TAG = "fragment";
 
     public static final String ARGUMENT_DAY_IN_SHEDULE = "day";
+    public static final String ARGUMENT_WEEK = "week";
 
     private int day;
 
     private LinearLayout linearLayout;
     private LayoutInflater layoutInflater;
 
-    public static PageFragment getInstance(int day){
+    public static PageFragment getInstance(int day, int week){
         PageFragment pageFragment = new PageFragment();
         Bundle args = new Bundle();
         args.putInt(ARGUMENT_DAY_IN_SHEDULE,day);
+        args.putInt(ARGUMENT_WEEK,week);
         pageFragment.setArguments(args);
         Log.d(LOG_TAG,"getInstance(day="+day+")");
         return pageFragment;
@@ -127,6 +130,12 @@ public class PageFragment extends Fragment {
                     break;
             }
         return resView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getArguments().getInt(ARGUMENT_WEEK)+" неделя");
     }
 
     public static final int LECTURE_TYPE = 1;

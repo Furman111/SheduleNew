@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     ViewPager pager;
     PagerAdapter pagerAdapter;
 
-    public final static Calendar dateOfStudyingBeggining = new GregorianCalendar(2017, 9, 1);
+    public final static Calendar dateOfStudyingBeggining = new GregorianCalendar(2017, 8, 1);
 
 
     @Override
@@ -41,15 +41,18 @@ public class MainActivity extends AppCompatActivity {
             Calendar nowDate = new GregorianCalendar();
             nowDate.add(Calendar.DAY_OF_YEAR, position);
             int currentWeek = nowDate.get(Calendar.WEEK_OF_YEAR);
+            Log.d(PageFragment.LOG_TAG,"currentWeek = "+currentWeek);
             currentWeek -= dateOfStudyingBeggining.get(Calendar.WEEK_OF_YEAR);
+            Log.d(PageFragment.LOG_TAG,"currentWeek = "+currentWeek);
             currentWeek = Math.abs(currentWeek);
+            Log.d(PageFragment.LOG_TAG,"currentWeek = "+currentWeek);
             currentWeek++;
             Log.d(PageFragment.LOG_TAG,"currentWeek = "+currentWeek);
             int currentDay = getDayOfWeek(nowDate);
             if (currentWeek % 2 == 0) {
                 currentDay += 7;
             }
-            return PageFragment.getInstance(currentDay);
+            return PageFragment.getInstance(currentDay,currentWeek);
         }
 
         private int getDayOfWeek(Calendar calendar){
